@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.api.dao.CartInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.example.api.entity.CartInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="food_id" property="foodId" jdbcType="VARCHAR" />
+    <result column="is_choose" property="isChoose" jdbcType="VARCHAR" />
+    <result column="sum" property="sum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, food_id, is_choose, sum
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dining_cart_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findByFoodIdAndUserId" resultType="com.example.api.entity.CartInfo">
+    select *
+    from dining_cart_info
+    where food_id = #{foodId} and user_id = #{userId}
+  </select>
+  <select id="findList" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select c.*,f.title,f.describe,f.img,f.inventory,f.price
+    from dining_cart_info as c,dining_food_info as f
+    where c.food_id = f.food_id and c.user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dining_cart_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="removeAll" parameterType="java.lang.Integer" >
+    delete from dining_cart_info
+    where user_id = #{userId}
+  </delete>
+  <delete id="delByFoodId">
+    delete from dining_cart_info
+    where food_id = #{foodId}
+  </delete>
+  <insert id="insert" parameterType="com.example.api.entity.CartInfo">
+    insert into dining_cart_info (user_id, food_id,checked, sum)
+    values (#{userId}, #{foodId},#{checked}, #{sum})
+  </insert>
+  <update id="sumAdd" parameterType="com.example.api.entity.CartInfo">
+    update dining_cart_info set sum = #{sum}
+    where id = #{id}
+  </update>
+  <update id="updateSum" parameterType="com.example.api.entity.CartInfo">
+    update dining_cart_info set sum = #{sum}
+    where food_id = #{foodId}
+  </update>
+</mapper>

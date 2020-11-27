@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.api.dao.PayHistoryMapper" >
+
+  <select id="findList" resultType="com.example.api.entity.PayHistory" >
+    select * from dining_pay_history
+    where user_id = #{userId} order by create_time desc
+  </select>
+
+  <insert id="insert" parameterType="com.example.api.entity.PayHistory" >
+    insert into dining_pay_history (user_id, money,create_time, pay_type, pay_channel,order_id)
+    values (#{userId}, #{money}, getDate(), #{payType}, #{payChannel}, #{orderId})
+  </insert>
+
+</mapper>

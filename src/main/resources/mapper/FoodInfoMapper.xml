@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.api.dao.FoodInfoDao">  <!--指定mapper对应的dao,这样mapper就会实现dao对应的方法-->
+
+  <select id="findList" resultType="com.example.api.entity.FoodInfo"><!--编写sql语句-->
+    SELECT * FROM dining_food_info where menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+
+  <select id="findLike" resultType="com.example.api.entity.FoodInfo"><!--编写sql语句-->
+    SELECT * FROM dining_food_info
+  </select>
+
+  <select id="findFoodByKey" resultType="com.example.api.entity.FoodInfo"><!--编写sql语句-->
+    SELECT * FROM dining_food_info where food_id = #{foodId}
+  </select>
+
+  <update id="sell">
+    update dining_food_info set sale = sale + #{num}, inventory = inventory - #{num}
+    where food_id = #{foodId}
+  </update>
+
+  <update id="browse">
+    update dining_food_info set browse_sum = browse_sum + 1
+    where food_id = #{foodId}
+  </update>
+
+</mapper>

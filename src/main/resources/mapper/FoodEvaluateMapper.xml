@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.api.dao.FoodEvaluateDao">
+
+  <select id="findByFoodId" resultType="com.example.api.entity.FoodEvaluate">
+    select e.*,u.user_name as evaluate_user_name,u.url as evaluate_user_img from dining_food_evaluate as e
+    left join dining_user_info as u on e.user_id = u.user_id
+    where food_id = #{foodId}
+  </select>
+
+  <insert id="insert" parameterType="com.example.api.entity.FoodEvaluate">
+    insert into dining_food_evaluate (food_id,content, user_id, evaluate_time )
+    values (#{foodId}, #{content}, #{userId}, getDate())
+  </insert>
+
+  <update id="zan">
+    update dining_food_evaluate set zan = zan + 1
+    where id = #{id}
+  </update>
+
+</mapper>
