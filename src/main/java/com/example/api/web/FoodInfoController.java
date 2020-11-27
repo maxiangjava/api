@@ -40,9 +40,9 @@ public class FoodInfoController {
     private Map<String,Object> list() {
         Map<String,Object> map = new HashMap<>();
         List<MenuInfo> menuList = menuInfoService.queryMenuInfo();
-        for (int i = 0; i < menuList.size(); i++) {
-            List<FoodInfo> foodList = foodInfoService.findList(menuList.get(i).getMenuId());
-            map.put(menuList.get(i).getMenuId()+"",foodList);
+        for (MenuInfo menuInfo : menuList) {
+            List<FoodInfo> foodList = foodInfoService.findList(menuInfo.getMenuId());
+            map.put(menuInfo.getMenuId() + "", foodList);
         }
         return map;
     }

@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -25,7 +23,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     @Transactional
-    public int pay(Map<String,Object> map) {
-        return dao.pay(map);
+    public void pay(Map<String,Object> map) {
+        dao.pay(map);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.api.web;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.api.entity.CartInfo;
 import com.example.api.service.CartInfoService;
@@ -24,8 +23,7 @@ public class CartInfoController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     private List<CartInfo> list(Integer userId) {
-        List<CartInfo> list = service.findList(userId);
-        return list;
+        return service.findList(userId);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)

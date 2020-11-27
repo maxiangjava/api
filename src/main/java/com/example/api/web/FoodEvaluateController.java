@@ -3,13 +3,8 @@ package com.example.api.web;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.api.entity.Food;
 import com.example.api.entity.FoodEvaluate;
-import com.example.api.entity.FoodInfo;
-import com.example.api.entity.ImgInfo;
 import com.example.api.service.FoodEvaluateService;
-import com.example.api.service.FoodInfoService;
-import com.example.api.service.ImgInfoService;
 import com.example.api.service.OrderInfoService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,8 +31,7 @@ public class FoodEvaluateController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     private List<FoodEvaluate> list(Integer foodId) {
         logger.info("-------/evaluate/list请求数据:" + foodId);
-        List<FoodEvaluate> list = service.findByFoodId(foodId);
-        return list;
+        return service.findByFoodId(foodId);
     }
 
     @RequestMapping(value = "/issue", method = RequestMethod.POST)

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.api.dao.FoodFavoriteDao">  <!--指定mapper对应的dao,这样mapper就会实现dao对应的方法-->
+
+    <select id="findList" resultType="com.example.api.entity.FoodFavorite"><!--编写sql语句-->
+        SELECT * FROM dining_food_favorite where user_id = #{userId}
+    </select>
+
+    <insert id="insert" parameterType="com.example.api.entity.FoodFavorite">
+        insert into dining_food_favorite (food_id, user_id, create_time )
+        values (#{foodId}, #{userId}, getDate())
+    </insert>
+
+</mapper>

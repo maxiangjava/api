@@ -1,10 +1,7 @@
 package com.example.api.service;
 
-import com.example.api.entity.MenuInfo;
 import com.example.api.entity.UserInfo;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,5 +11,5 @@ public interface UserInfoService {
 
     UserInfo selectByPrimaryKey(Integer id);
 
-    int pay(Map<String,Object> map);
+    void pay(Map<String,Object> map);
 }

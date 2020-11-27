@@ -86,8 +86,7 @@ public class OrderController {
         orderInfo.setOrderId(id);
         service.insert(orderInfo);
         List<OrderDetail> detailList = detailService.findByOrderId(orderId);
-        for (int i = 0; i < detailList.size(); i++) {
-            OrderDetail detail = detailList.get(i);
+        for (OrderDetail detail : detailList) {
             detail.setOrderId(id);
             detailService.insert(detail);
         }
@@ -111,7 +110,7 @@ public class OrderController {
         OrderInfo info = new OrderInfo();
         info.setUserId(userId);
         info.setState(state);
-        List<OrderInfo> infos = new ArrayList<>();
+        List<OrderInfo> infos;
         if("ALL".equals(state)){
             logger.info("-------查询全部:" + state);
             infos = service.findByStatusAll(userId);
@@ -119,9 +118,8 @@ public class OrderController {
             logger.info("-------查询部分:" + state);
             infos = service.findByStatus(info);
         }
-        for (int i = 0; i < infos.size(); i++) {
+        for (OrderInfo orderInfo : infos) {
             Order order = new Order();
-            OrderInfo orderInfo = infos.get(i);
             order.setOrderInfo(orderInfo);
             order.setOrderDetailList(detailService.findByOrderId(orderInfo.getOrderId()));
             orderList.add(order);

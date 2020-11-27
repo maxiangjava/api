@@ -1,8 +1,6 @@
 package com.example.api.web;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.example.api.entity.AddressInfo;
 import com.example.api.service.AddressInfoService;
 import org.apache.commons.logging.Log;
@@ -12,9 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by matthew on 2020/10/23.
@@ -31,7 +27,6 @@ public class AddressInfoController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     private List<AddressInfo> list(String userId){
         logger.info("-------请求数据:" + userId);
-        List<AddressInfo> aa = addressInfoService.findListByUserId(userId);
         return addressInfoService.findListByUserId(userId);
     }
 
@@ -69,7 +64,7 @@ public class AddressInfoController {
 
     @RequestMapping(value = "/setDefault", method = RequestMethod.POST)
     private String setDefault(AddressInfo addressInfo){
-
+        logger.info("-------修改地址数据:" + addressInfo);
         return "succeed";
     }
 }
