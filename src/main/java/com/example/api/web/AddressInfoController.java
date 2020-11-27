@@ -62,6 +62,7 @@ public class AddressInfoController {
 
     @RequestMapping(value = "/del", method = RequestMethod.GET)
     private String del(Integer addressId){
+        logger.info("-------修改地址数据:" + addressId);
         addressInfoService.deleteByPrimaryKey(addressId);
         return "succeed";
     }
