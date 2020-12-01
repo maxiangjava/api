@@ -34,7 +34,7 @@ public class CartInfoController {
         CartInfo cart = service.findByFoodIdAndUserId(record);
         //不存在，直接加
         if(null == cart){
-            record.setChecked(false);
+            record.setChecked(true);
             record.setSum(1);
             service.insert(record);
             return "添加购物车成功";

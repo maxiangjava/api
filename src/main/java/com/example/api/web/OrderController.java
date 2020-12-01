@@ -129,11 +129,12 @@ public class OrderController {
 
 
     @RequestMapping(value = "/pay", method = RequestMethod.GET)
-    private String pay(String userId,Double money,String orderId,String addressId,String desc) {
+    private String pay(String userId,Double money,String orderId,String addressId,String desc,String arriveTime) {
         logger.info("-------请求数据:" + userId);
         logger.info("-------请求数据:" + money);
         logger.info("-------请求数据:" + orderId);
         logger.info("-------请求数据:" + desc);
+        logger.info("-------请求数据:" + arriveTime);
         List<OrderDetail> detailList = detailService.findByOrderId(orderId);
         Map<String,Object> map = new HashMap<>();
         map.put("userId",userId);
