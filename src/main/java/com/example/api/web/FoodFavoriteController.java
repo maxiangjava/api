@@ -1,6 +1,8 @@
 package com.example.api.web;
 
+import com.example.api.entity.Favorite;
 import com.example.api.entity.FoodFavorite;
+import com.example.api.entity.FoodInfo;
 import com.example.api.service.FoodFavoriteService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,15 +22,33 @@ public class FoodFavoriteController {
     private FoodFavoriteService service;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    private List<FoodFavorite> list(String userId) {
+    private List<Favorite> list(String userId) {
         logger.info("查看收藏记录：" + userId);
         return service.findList(userId);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     private String add(@RequestBody  FoodFavorite favorite) {
-        service.insert(favorite);
+        if(null == service.findByUserIdFoodId(favorite)){
+            logger.info("收藏记录为空，开始增加");
+            service.insert(favorite);
+        }
         return "succeed";
     }
+
+    @RequestMapping(value = "/del", method = RequestMethod.GET)
+    private String del(String favoriteId) {
+        logger.info("删除收藏记录：" + favoriteId);
+        service.delByKey(favoriteId);
+        return "succeed";
+    }
+
+    @RequestMapping(value = "/remove", method = RequestMethod.GET)
+    private String remove(String userId) {
+        logger.info("清空收藏记录：" + userId);
+        service.remove(userId);
+        return "succeed";
+    }
+
 
 }

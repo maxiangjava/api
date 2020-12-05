@@ -1,6 +1,8 @@
 package com.example.api.service;
 
+import com.example.api.entity.Favorite;
 import com.example.api.entity.FoodFavorite;
+import com.example.api.entity.FoodInfo;
 
 import java.util.List;
 
@@ -9,7 +11,14 @@ import java.util.List;
  */
 public interface FoodFavoriteService {
 
-    List<FoodFavorite> findList(String userId);
+    List<Favorite> findList(String userId);
+
+    FoodFavorite findByUserIdFoodId(FoodFavorite pojo);
 
     int insert(FoodFavorite pojo);
+
+    int delByKey(String favoriteId);
+
+    int remove(String userId);
+
 }
